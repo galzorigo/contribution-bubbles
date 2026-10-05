@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>contribution-dots preview</title>
+    <style>
+      body { margin: 0; background: #ffffff; color: #737373; }
+      main { width: 400px; padding: 32px; }
+    </style>
+    <script type="importmap">
+      { "imports": { "react": "https://esm.sh/react@19", "react/jsx-runtime": "https://esm.sh/react@19/jsx-runtime", "react-dom/client": "https://esm.sh/react-dom@19/client" } }
+    </script>
+  </head>
+  <body>
+    <main id="root"></main>
+    <script type="module">
+      import { createElement } from "react";
+      import { createRoot } from "react-dom/client";
+      import { ContributionDots } from "../dist/index.js";
+
+      // Example data for the README image: a busy, seeded year
+      let seed = 7;
+      const rand = () => ((seed = (seed * 16807) % 2147483647) - 1) / 2147483646;
+      const data = [];
+      const end = Date.UTC(2026, 9, 5);
+      let mood = 1;
+      for (let i = 365; i >= 0; i--) {
+        const d = new Date(end - i * 86400000);
+        if (d.getUTCDay() === 1) mood = rand() < 0.08 ? 0 : 0.6 + rand() * 1.2;
+        const weekend = d.getUTCDay() === 0 || d.getUTCDay() === 6;
+        const base = weekend ? (rand() < 0.5 ? 0 : 3) : 11;
+        data.push({ date: d.toISOString().slice(0, 10), count: Math.max(0, Math.round(base * mood * (0.3 + rand() * 1.4))) });
+      }
+      createRoot(document.getElementById("root")).render(createElement(ContributionDots, { data, width: 400 }));
+    </script>
+  </body>
+</html>

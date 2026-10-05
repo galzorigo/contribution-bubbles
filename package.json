@@ -1,5 +1,5 @@
 {
-  "name": "contribution-dots",
+  "name": "contribution-bubbles",
   "version": "0.1.0",
   "description": "A GitHub contribution chart drawn as bubbles. One line of React, just a username.",
   "license": "MIT",
@@ -56,10 +56,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/galzorigo/contribution-dots.git"
+    "url": "git+https://github.com/galzorigo/contribution-bubbles.git"
   },
-  "homepage": "https://github.com/galzorigo/contribution-dots#readme",
+  "homepage": "https://github.com/galzorigo/contribution-bubbles#readme",
   "bugs": {
-    "url": "https://github.com/galzorigo/contribution-dots/issues"
+    "url": "https://github.com/galzorigo/contribution-bubbles/issues"
   }
 }

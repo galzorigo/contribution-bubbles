@@ -1,7 +1,7 @@
 import { createElement } from "react";
 import { renderToString } from "react-dom/server";
 import { describe, expect, it } from "vitest";
-import { ContributionDots, type ContributionDay } from "../src/index";
+import { ContributionBubbles, type ContributionDay } from "../src/index";
 
 // A steady year: a few contributions every weekday, quiet weekends
 function year(): ContributionDay[] {
@@ -15,12 +15,12 @@ function year(): ContributionDay[] {
   return days;
 }
 
-const render = (props: Parameters<typeof ContributionDots>[0]) =>
-  renderToString(createElement(ContributionDots, props));
+const render = (props: Parameters<typeof ContributionBubbles>[0]) =>
+  renderToString(createElement(ContributionBubbles, props));
 const circles = (html: string) => (html.match(/<circle/g) ?? []).length;
 const columns = (html: string) => new Set([...html.matchAll(/cx="([^"]+)"/g)].map((m) => m[1])).size;
 
-describe("ContributionDots", () => {
+describe("ContributionBubbles", () => {
   it("draws a dot for every active day and the total", () => {
     const data = year();
     const html = render({ data, width: 400 });

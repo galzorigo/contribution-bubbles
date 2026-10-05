@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <title>contribution-dots preview</title>
+    <title>contribution-bubbles preview</title>
     <style>
       body { margin: 0; background: #ffffff; color: #737373; }
       main { width: 400px; padding: 32px; }
@@ -16,7 +16,7 @@
     <script type="module">
       import { createElement } from "react";
       import { createRoot } from "react-dom/client";
-      import { ContributionDots } from "../dist/index.js";
+      import { ContributionBubbles } from "../dist/index.js";
 
       // Example data for the README image: a busy, seeded year
       let seed = 7;
@@ -31,7 +31,7 @@
         const base = weekend ? (rand() < 0.5 ? 0 : 3) : 11;
         data.push({ date: d.toISOString().slice(0, 10), count: Math.max(0, Math.round(base * mood * (0.3 + rand() * 1.4))) });
       }
-      createRoot(document.getElementById("root")).render(createElement(ContributionDots, { data, width: 400 }));
+      createRoot(document.getElementById("root")).render(createElement(ContributionBubbles, { data, width: 400 }));
     </script>
   </body>
 </html>

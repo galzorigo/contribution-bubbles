@@ -2,19 +2,19 @@ import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { fetchContributions, type ContributionDay } from "./data";
 
 /*
-  contribution-dots
+  contribution-bubbles
   A GitHub style contribution chart drawn as bubbles that spill over their neighbours.
   One column per week, one row per weekday. Busier days get bigger, stronger bubbles.
 
-  <ContributionDots username="octocat" />
+  <ContributionBubbles username="octocat" />
 */
 
 export { fetchContributions, type ContributionDay };
 
 /** Parts of the chart that take their own class names and inline styles */
-export type ContributionDotsPart = "root" | "months" | "month" | "chart" | "total";
+export type ContributionBubblesPart = "root" | "months" | "month" | "chart" | "total";
 
-export type ContributionDotsProps = {
+export type ContributionBubblesProps = {
   // Data. Pass one of these
 
   /** GitHub username. The chart loads that user's past year by itself */
@@ -89,9 +89,9 @@ export type ContributionDotsProps = {
   className?: string;
   style?: React.CSSProperties;
   /** Class names per part, for your own CSS or Tailwind */
-  classNames?: Partial<Record<ContributionDotsPart, string>>;
+  classNames?: Partial<Record<ContributionBubblesPart, string>>;
   /** Inline styles per part, applied last so they win */
-  styles?: Partial<Record<ContributionDotsPart, React.CSSProperties>>;
+  styles?: Partial<Record<ContributionBubblesPart, React.CSSProperties>>;
 };
 
 const DAY = 86400000;
@@ -103,7 +103,7 @@ const useIsomorphicLayoutEffect = typeof window === "undefined" ? useEffect : us
 
 type Status = "idle" | "loading" | "ready" | "error";
 
-export function ContributionDots({
+export function ContributionBubbles({
   username,
   data,
   width: fixedWidth,
@@ -135,7 +135,7 @@ export function ContributionDots({
   style,
   classNames = {},
   styles = {},
-}: ContributionDotsProps) {
+}: ContributionBubblesProps) {
   const ref = useRef<HTMLDivElement>(null);
   const [measured, setMeasured] = useState(FALLBACK_WIDTH);
   const [loaded, setLoaded] = useState<ContributionDay[] | null>(null);

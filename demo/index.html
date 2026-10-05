@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>contribution-dots demo</title>
+    <title>contribution-bubbles demo</title>
     <style>
       body { margin: 0; background: #fafafa; color: #737373; font-family: system-ui, sans-serif; }
       main { width: 400px; margin: 48px auto; }
@@ -23,12 +23,12 @@
     <script type="module">
       import { createElement } from "react";
       import { createRoot } from "react-dom/client";
-      import { ContributionDots } from "../dist/index.js";
+      import { ContributionBubbles } from "../dist/index.js";
 
       // ?user=name to try someone else, ?width=320 to try a narrower chart
       const params = new URLSearchParams(location.search);
       createRoot(document.getElementById("root")).render(
-        createElement(ContributionDots, {
+        createElement(ContributionBubbles, {
           username: params.get("user") ?? "galzorigo",
           width: params.has("width") ? Number(params.get("width")) : undefined,
           onError: (e) => (document.title = "error: " + e.message),

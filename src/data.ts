@@ -30,18 +30,18 @@ const cache = new Map<string, { at: number; promise: Promise<ContributionDay[]> 
  */
 export function fetchContributions(username: string, init?: RequestInit): Promise<ContributionDay[]> {
   const key = username.trim().toLowerCase();
-  if (!key) return Promise.reject(new Error("contribution-dots: username is empty"));
+  if (!key) return Promise.reject(new Error("contribution-bubbles: username is empty"));
 
   const hit = cache.get(key);
   if (hit && Date.now() - hit.at < TTL) return hit.promise;
 
   const promise = fetch(`${API}/${encodeURIComponent(key)}?y=last`, init)
     .then(async (res) => {
-      if (res.status === 404) throw new Error(`contribution-dots: GitHub user "${username}" not found`);
-      if (!res.ok) throw new Error(`contribution-dots: could not load "${username}" (HTTP ${res.status})`);
+      if (res.status === 404) throw new Error(`contribution-bubbles: GitHub user "${username}" not found`);
+      if (!res.ok) throw new Error(`contribution-bubbles: could not load "${username}" (HTTP ${res.status})`);
       const json = (await res.json()) as { contributions?: ContributionDay[] };
       if (!Array.isArray(json.contributions)) {
-        throw new Error(`contribution-dots: unexpected response for "${username}"`);
+        throw new Error(`contribution-bubbles: unexpected response for "${username}"`);
       }
       return json.contributions.map(({ date, count }) => ({ date, count }));
     })

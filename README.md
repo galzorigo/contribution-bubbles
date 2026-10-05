@@ -1,17 +1,17 @@
-# contribution-dots
+# contribution-bubbles
 
 Your GitHub contributions as bubbles. One line of React, just a username.
 
-![contribution-dots preview](https://raw.githubusercontent.com/galzorigo/contribution-dots/main/docs/preview.png)
+![contribution-bubbles preview](https://raw.githubusercontent.com/galzorigo/contribution-bubbles/main/docs/preview.png)
 
 ```bash
-npm install contribution-dots
+npm install contribution-bubbles
 ```
 
 ```tsx
-import { ContributionDots } from "contribution-dots";
+import { ContributionBubbles } from "contribution-bubbles";
 
-<ContributionDots username="octocat" />
+<ContributionBubbles username="octocat" />
 ```
 
 That's it. It loads the past year from GitHub, fills its container and draws one column per week, one row per weekday. Busier days get bigger, stronger bubbles.
@@ -21,13 +21,13 @@ No API key, no login, no CSS to import. Works in any React 18+ app, including Ne
 ## Size and color
 
 ```tsx
-<ContributionDots username="octocat" width={400} color="#30a14e" />
+<ContributionBubbles username="octocat" width={400} color="#30a14e" />
 ```
 
 Leave out `width` to fill the parent. The width decides how many weeks fit, about a year in 400px. To pick the number yourself, use `weeks`.
 
 ```tsx
-<ContributionDots username="octocat" weeks={26} />
+<ContributionBubbles username="octocat" weeks={26} />
 ```
 
 ## Next.js
@@ -36,12 +36,12 @@ The component works in server pages as is. For the best performance, load the da
 
 ```tsx
 // app/page.tsx
-import { ContributionDots } from "contribution-dots";
-import { fetchContributions } from "contribution-dots/server";
+import { ContributionBubbles } from "contribution-bubbles";
+import { fetchContributions } from "contribution-bubbles/server";
 
 export default async function Page() {
   const days = await fetchContributions("octocat", { next: { revalidate: 3600 } });
-  return <ContributionDots data={days} />;
+  return <ContributionBubbles data={days} />;
 }
 ```
 
@@ -50,7 +50,7 @@ export default async function Page() {
 While a username loads, the chart keeps its space so the page doesn't jump. If loading fails (a typo in the username, say), the chart shows nothing and logs why to the console.
 
 ```tsx
-<ContributionDots
+<ContributionBubbles
   username="octocat"
   loading={<p>Loading activity…</p>}
   fallback={<p>No activity yet</p>}
@@ -99,7 +99,7 @@ Every prop is optional except one of `username` or `data`.
 Every part takes its own class name and inline style, so you can restyle it with your own CSS or Tailwind. The parts are `root`, `months`, `month`, `chart` and `total`.
 
 ```tsx
-<ContributionDots
+<ContributionBubbles
   username="octocat"
   monthFont="'JetBrains Mono', monospace"
   totalFont="Inter, sans-serif"
@@ -119,7 +119,7 @@ The package doesn't ship fonts. It uses whatever your site loads. Load the font 
 import { JetBrains_Mono } from "next/font/google";
 const mono = JetBrains_Mono({ subsets: ["latin"], variable: "--font-mono" });
 
-<ContributionDots username="octocat" font="var(--font-mono)" />
+<ContributionBubbles username="octocat" font="var(--font-mono)" />
 ```
 
 ## Dark mode
@@ -127,7 +127,7 @@ const mono = JetBrains_Mono({ subsets: ["latin"], variable: "--font-mono" });
 Pass a CSS variable and set it per theme.
 
 ```tsx
-<ContributionDots username="octocat" color="var(--dots)" />
+<ContributionBubbles username="octocat" color="var(--dots)" />
 ```
 
 ```css
@@ -138,7 +138,7 @@ Pass a CSS variable and set it per theme.
 ## Other languages
 
 ```tsx
-<ContributionDots username="octocat" locale="de" formatTotal={(n) => `${n} Beiträge im letzten Jahr`} />
+<ContributionBubbles username="octocat" locale="de" formatTotal={(n) => `${n} Beiträge im letzten Jahr`} />
 ```
 
 ## Your own data
@@ -146,7 +146,7 @@ Pass a CSS variable and set it per theme.
 Anything with a date and a count works, not just GitHub.
 
 ```tsx
-<ContributionDots
+<ContributionBubbles
   data={[
     { date: "2026-10-01", count: 3 },
     { date: "2026-10-02", count: 7 },
